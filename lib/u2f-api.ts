@@ -1,6 +1,7 @@
 'use strict';
 
 import * as chromeApi from './generated-google-u2f-api'
+import { resolve } from 'url';
 
 
 // Feature detection (yes really)
@@ -264,6 +265,34 @@ export function sign(
 				);
 
 			u2f.sign( appId, challenge, registeredKeys, callback, timeout );
+		} );
+	} );
+}
+
+export function cancel(): Promise<void>
+{
+	return new Promise( function( resolve ){
+		return getBackend()
+		.then( function ( backend )
+		{
+			_ensureSupport( backend );
+
+			const { u2f } = backend;
+			const { port_: wrappedPort } = u2f;
+
+			if ( wrappedPort )
+			{
+				const { port_: nativePort } = wrappedPort;
+
+				// disconnect from current port to force a cancel
+				if ( nativePort )
+				{
+					nativePort.disconnect();
+					u2f.port_ = null;
+				}
+			}
+
+			resolve();
 		} );
 	} );
 }

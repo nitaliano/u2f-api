@@ -1,12 +1,12 @@
 {
-  "name": "u2f-api",
+  "name": "nick-u2f-api",
   "description": "Promisified U2F API for browsers",
   "license": "MIT",
-  "version": "0.0.0-development",
+  "version": "0.0.1",
   "author": "Gustaf Räntilä <g.rantila@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/grantila/u2f-api.git"
+    "url": "https://github.com/nitaliano/u2f-api.git"
   },
   "files": [
     "dist"
